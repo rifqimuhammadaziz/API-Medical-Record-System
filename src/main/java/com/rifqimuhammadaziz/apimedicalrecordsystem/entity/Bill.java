@@ -12,8 +12,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "billings")
-public class Billing {
+@Table(name = "bills")
+public class Bill {
 
     @Id
     private String id;

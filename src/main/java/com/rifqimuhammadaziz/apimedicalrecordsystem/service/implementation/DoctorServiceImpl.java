@@ -1,13 +1,13 @@
 package com.rifqimuhammadaziz.apimedicalrecordsystem.service.implementation;
 
 import com.rifqimuhammadaziz.apimedicalrecordsystem.entity.Doctor;
-import com.rifqimuhammadaziz.apimedicalrecordsystem.entity.Patient;
 import com.rifqimuhammadaziz.apimedicalrecordsystem.repository.DoctorRepository;
 import com.rifqimuhammadaziz.apimedicalrecordsystem.service.contract.DoctorService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -17,6 +17,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor createDoctor(Doctor doctor) {
+        doctor.setId(UUID.randomUUID().toString());
         return doctorRepository.save(doctor);
     }
 
