@@ -9,32 +9,44 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/schedule")
+@RequestMapping("/api")
 public class ScheduleController {
 
     private final ScheduleService scheduleService;
 
-    @PostMapping
-    public Schedule createSchedule(@RequestBody Schedule schedule) {
-        return scheduleService.createSchedule(schedule);
+    // Create Schedule of Patient
+    @PostMapping("/patients/{patientId}/schedules")
+    public Schedule createSchedule(@PathVariable("patientId") String patientId,
+                                   @RequestBody Schedule schedule) {
+        return scheduleService.createSchedule(patientId, schedule);
     }
 
-    @GetMapping
+    // Find All Schedules (All Patient)
+    @GetMapping("/schedules")
     public List<Schedule> findAllSchedules() {
         return scheduleService.findAllSchedules();
     }
 
-    @GetMapping("/{id}")
-    public Schedule findSingleSchedule(@PathVariable("id") String id) {
-        return scheduleService.findSingleSchedule(id);
+    // Find All Schedules (Single Patient)
+    @GetMapping("/patients/{patientId}/schedules")
+    public List<Schedule> findAllSchedulesByPatient(@PathVariable String patientId) {
+        return scheduleService.findAllSchedulesByPatient(patientId);
     }
 
-    @PutMapping
+    // Find Single Schedule By Schedule ID
+    @GetMapping("/patients/{patientId}/schedules/{scheduleId}")
+    public Schedule findSingleSchedule(@PathVariable("scheduleId") String scheduleId) {
+        return scheduleService.findSingleSchedule(scheduleId);
+    }
+
+    // Update Schedule By Patient
+    @PutMapping("/patients/{patientId}/schedules")
     public Schedule updateSchedule(@RequestBody Schedule schedule) {
         return scheduleService.updateSchedule(schedule);
     }
 
-    @DeleteMapping("/{id}")
+    // Delete Schedule
+    @DeleteMapping("/schedules/{id}")
     public void deleteScheduleByID(@PathVariable("id") String id) {
         scheduleService.deleteScheduleByID(id);
     }

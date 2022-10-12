@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Getter
@@ -20,7 +18,10 @@ public class Schedule {
 
     @Id
     private String id;
-    private String patientID;
+
+    @JoinColumn
+    @ManyToOne
+    private Patient patient;
     private Date scheduleDate;
     private String scheduleStatus;
 
