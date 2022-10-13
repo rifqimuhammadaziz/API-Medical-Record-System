@@ -1,6 +1,8 @@
 package com.rifqimuhammadaziz.apimedicalrecordsystem.service.implementation;
 
 import com.rifqimuhammadaziz.apimedicalrecordsystem.entity.Patient;
+import com.rifqimuhammadaziz.apimedicalrecordsystem.exception.ApiRequestException;
+import com.rifqimuhammadaziz.apimedicalrecordsystem.exception.ResourceNotFoundException;
 import com.rifqimuhammadaziz.apimedicalrecordsystem.repository.PatientRepository;
 import com.rifqimuhammadaziz.apimedicalrecordsystem.service.contract.PatientService;
 import lombok.AllArgsConstructor;
@@ -26,7 +28,9 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient findSinglePatientByID(String id) {
-        return patientRepository.findById(id).get();
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new ApiRequestException("Not found"));
+        return patient;
     }
 
     @Override
