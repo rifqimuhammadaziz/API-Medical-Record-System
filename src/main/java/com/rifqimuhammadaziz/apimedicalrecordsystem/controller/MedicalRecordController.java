@@ -9,12 +9,13 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/medical-record")
+@RequestMapping("/api/patient")
 public class MedicalRecordController {
 
     private final MedicalRecordService medicalRecordService;
 
-    @PostMapping
+    // Medical Record of Patient
+    @PostMapping("/{id}/medical-record")
     public MedicalRecord createMedicalRecord(@RequestBody MedicalRecord medicalRecord) {
         return medicalRecordService.createMedicalRecord(medicalRecord);
     }

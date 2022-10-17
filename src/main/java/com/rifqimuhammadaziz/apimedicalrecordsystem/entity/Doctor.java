@@ -8,13 +8,17 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "doctors")
+@Table(
+        name = "doctors",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"doctorRecordNumber"})}
+)
 public class Doctor {
 
     @Id
