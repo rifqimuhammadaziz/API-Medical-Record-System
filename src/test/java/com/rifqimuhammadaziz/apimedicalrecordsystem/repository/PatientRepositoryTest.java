@@ -1,6 +1,7 @@
 package com.rifqimuhammadaziz.apimedicalrecordsystem.repository;
 
 import com.rifqimuhammadaziz.apimedicalrecordsystem.entity.Patient;
+import com.rifqimuhammadaziz.apimedicalrecordsystem.entity.enums.Gender;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -76,5 +77,4 @@ class PatientRepositoryTest {
 
         Assertions.assertThat(patient1).isNull();
     }
-
 }

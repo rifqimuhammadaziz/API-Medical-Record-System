@@ -18,6 +18,8 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient createPatient(Patient patient) {
+        boolean patientExists = patientRepository.existsById(patient.getIdNumber());
+        // thr with message "ID: ... is taken"
         return patientRepository.save(patient);
     }
 
