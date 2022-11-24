@@ -38,34 +38,37 @@ public class PatientController {
 
     @Operation(summary = "Get All Patients", description = "API for fetch all patient from database")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success get all patients from database", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "400", description = "Failed get all patients from database", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json"))
+            @ApiResponse(responseCode = "2xx", description = "Success get all patients from database", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "4xx", description = "Failed get all patients from database", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "5xx", description = "Internal server error", content = @Content(mediaType = "application/json"))
     })
     @GetMapping()
     public List<Patient> findAllPatients() {
+        log.info("[][DATA PATIENT RECEIVED]");
         return patientService.findAllPatients();
     }
 
     @Operation(summary = "Get Single Patient By ID", description = "API for get single patient by ID from database")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success get patient from database", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "400", description = "Failed get patient from database", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json"))
+            @ApiResponse(responseCode = "2xx", description = "Success get patient from database", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "4xx", description = "Failed get patient from database", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "5xx", description = "Internal server error", content = @Content(mediaType = "application/json"))
     })
     @GetMapping("/{id}")
     public ResponseEntity<Patient> findSinglePatientByID(@PathVariable("id") String id) {
+        log.info("[{}][DATA PATIENT RECEIVED]", id);
         return ResponseEntity.ok(patientService.findSinglePatientByID(id));
     }
 
     @Operation(summary = "Update Patient", description = "API for update patient")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success update patient to database", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "400", description = "Failed update patient to database", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json"))
+            @ApiResponse(responseCode = "2xx", description = "Success update patient to database", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "4xx", description = "Failed update patient to database", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "5xx", description = "Internal server error", content = @Content(mediaType = "application/json"))
     })
     @PutMapping()
     public Patient updatePatient(@RequestBody Patient patient) {
+        log.info("[{}][DATA PATIENT UPDATED][{}]", patient.getIdNumber(), patient.getFullName());
         return patientService.updatePatient(patient);
     }
 
@@ -78,6 +81,7 @@ public class PatientController {
     @DeleteMapping("/{id}")
     public void deleteSinglePatientByID(@PathVariable("id") String id) {
         patientService.deleteSinglePatientByID(id);
+        log.info("[{}][DATA PATIENT DELETED SUCCESSFULLY]", id);
     }
 
 }
