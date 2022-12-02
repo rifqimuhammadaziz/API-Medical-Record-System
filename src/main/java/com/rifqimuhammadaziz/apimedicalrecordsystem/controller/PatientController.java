@@ -74,9 +74,9 @@ public class PatientController {
 
     @Operation(summary = "Delete Patient By ID", description = "API for delete single patient by ID")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success insert patient to database", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "400", description = "Failed insert patient to database", content = @Content(mediaType = "application/json")),
-            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = "application/json"))
+            @ApiResponse(responseCode = "2xx", description = "Success insert patient to database", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "4xx", description = "Failed insert patient to database", content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "5xx", description = "Internal server error", content = @Content(mediaType = "application/json"))
     })
     @DeleteMapping("/{id}")
     public void deleteSinglePatientByID(@PathVariable("id") String id) {
