@@ -1,6 +1,6 @@
 package com.rifqimuhammadaziz.apimedicalrecordsystem.controller.mail;
 
-import com.rifqimuhammadaziz.apimedicalrecordsystem.service.contract.MailService;
+import com.rifqimuhammadaziz.apimedicalrecordsystem.service.contract.mail.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
