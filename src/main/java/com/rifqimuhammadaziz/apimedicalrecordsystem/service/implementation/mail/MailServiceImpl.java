@@ -27,6 +27,8 @@ public class MailServiceImpl implements MailService {
     @Autowired
     ThymeleafService thymeleafService;
 
+    private final String REGISTER_SUBJECT = "Registration - Medical Record System Xenosty Hospital";
+
     @Value("${spring.mail.username}")
     private String email;
 
@@ -76,8 +78,9 @@ public class MailServiceImpl implements MailService {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             variables.put("date", dateFormat.format(new Date()));
 
-            helper.setText(thymeleafService.createContent("create-user-mail-template.html", variables), true);
+            helper.setText(thymeleafService.createContent("mail/create-patient.html", variables), true);
             helper.setFrom(email);
+            helper.setSubject(REGISTER_SUBJECT);
 
             mailSender.send(message);
         } catch (Exception e) {
