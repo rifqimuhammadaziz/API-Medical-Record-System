@@ -8,6 +8,9 @@ import java.util.Date;
 @Data
 public class PatientDTO {
 
+    @JsonProperty("email")
+    private String email;
+
     @JsonProperty("id_number")
     private String idNumber;
 

@@ -87,4 +87,37 @@ public class MailServiceImpl implements MailService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void sendMailCreatePatient(PatientDTO patientDTO) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(
+                    message,
+                    MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+                    StandardCharsets.UTF_8.name()
+            );
+
+            helper.setTo(patientDTO.getEmail());
+
+            Map<String, Object> variables = new HashMap<>();
+            variables.put("idNumber", patientDTO.getIdNumber());
+            variables.put("fullName", patientDTO.getFullName());
+            variables.put("birthdate", patientDTO.getBirthdate());
+            variables.put("age", patientDTO.getAge());
+            variables.put("gender", patientDTO.getGender());
+            variables.put("bloodGroup", patientDTO.getBloodGroup());
+            variables.put("religion", patientDTO.getReligion());
+            variables.put("address", patientDTO.getAddress());
+            variables.put("citizenship", patientDTO.getCitizenship());
+
+            helper.setText(thymeleafService.createContent("mail/create-patients.html", variables), true);
+            helper.setFrom(email);
+            helper.setSubject(REGISTER_SUBJECT);
+
+            mailSender.send(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

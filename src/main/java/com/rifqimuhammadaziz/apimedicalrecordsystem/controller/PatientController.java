@@ -1,6 +1,7 @@
 package com.rifqimuhammadaziz.apimedicalrecordsystem.controller;
 
 import com.rifqimuhammadaziz.apimedicalrecordsystem.entity.Patient;
+import com.rifqimuhammadaziz.apimedicalrecordsystem.model.request.PatientDTO;
 import com.rifqimuhammadaziz.apimedicalrecordsystem.service.contract.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -31,9 +32,9 @@ public class PatientController {
             @ApiResponse(responseCode = "5xx", description = "Internal server error", content = @Content(mediaType = "application/json"))
     })
     @PostMapping()
-    public Patient createPatient(@RequestBody @Valid Patient patient) {
-        log.info("[{}][REQUEST RECEIVED][{}]", patient.getIdNumber(), patient.getFullName());
-        return patientService.createPatient(patient);
+    public Patient createPatient(@RequestBody @Valid PatientDTO patientDTO) {
+        log.info("[{}][REQUEST RECEIVED][{}]", patientDTO.getIdNumber(), patientDTO.getFullName());
+        return patientService.createPatient(patientDTO);
     }
 
     @Operation(summary = "Get All Patients", description = "API for fetch all patient from database")

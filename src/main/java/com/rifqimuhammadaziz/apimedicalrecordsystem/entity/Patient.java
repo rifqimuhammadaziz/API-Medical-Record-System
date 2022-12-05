@@ -17,6 +17,10 @@ import java.util.Date;
 public class Patient {
 
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "id_number")
     private String idNumber;
 
